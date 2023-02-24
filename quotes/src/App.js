@@ -5,7 +5,7 @@ import { Fade, Bounce } from "react-reveal";
 function App() {
   const [quotes, setquotes] = useState([]); // we need to use [] instead of null in here
   useEffect(() => {
-    fetch("http://localhost:3002")
+    fetch("http://localhost:3003")
       .then((res) => res.json())
       .then((data) => {
         setquotes(data);
