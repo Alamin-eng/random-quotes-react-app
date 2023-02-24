@@ -1,15 +1,27 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { Fade, Bounce } from "react-reveal";
+import axios from "axios";
 
 function App() {
   const [quotes, setquotes] = useState([]); // we need to use [] instead of null in here
+
+  // useEffect(() => {
+  //   fetch("http://localhost:3003")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setquotes(data);
+  //       console.log(data);
+  //     });
+  // }, []);
   useEffect(() => {
-    fetch("http://localhost:3003")
-      .then((res) => res.json())
-      .then((data) => {
-        setquotes(data);
-        console.log(data);
+    axios
+      .get("http://localhost:3003")
+      .then((response) => {
+        setquotes(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
