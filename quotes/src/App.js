@@ -7,7 +7,7 @@ function App() {
   const [quotes, setquotes] = useState([]); // we need to use [] instead of null in here
 
   useEffect(() => {
-    //for package - "start": "node ../server.js & react-scripts start",
+    //for package.json - "start": "node ../server.js & react-scripts start",
     fetchData(); // separate fetch data function created below and called in here
   }, []);
 
@@ -33,8 +33,16 @@ const fetchData = async () => {
         <h1>Random Quotes</h1>
         <Bounce left cascade>
           <div className="parent">
-            <h2> " {quotes.quote} " </h2>
-            <h4> {quotes.author} </h4>
+            <h2>
+              {" "}
+              " {!quotes.quote
+                ? "Click button for next quote"
+                : quotes.quote} "{" "}
+            </h2>
+            <h4>
+              {" "}
+              <span className="author-font">{quotes.author && quotes.author}</span>{" "}
+            </h4>
             <hr></hr>
           </div>
         </Bounce>
