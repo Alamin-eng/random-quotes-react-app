@@ -6,27 +6,25 @@ import axios from "axios";
 function App() {
   const [quotes, setquotes] = useState([]); // we need to use [] instead of null in here
 
-  // useEffect(() => {
-  //   fetch("http://localhost:3003")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setquotes(data);
-  //       console.log(data);
-  //     });
-  // }, []);
   useEffect(() => {
-    axios
-      .get("http://localhost:3003")
-      .then((response) => {
-        setquotes(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //for package - "start": "node ../server.js & react-scripts start",
+    fetchData(); // separate fetch data function created below and called in here
   }, []);
 
+// used axios to fetch external link
+const fetchData = async () => {
+  try {
+    const response = await axios.get(
+      "https://quotes-node-server.onrender.com/"
+    );
+    setquotes(response.data); // we are getting only data from response
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   function getQuote() {
-    return window.location.reload();
+    window.location.reload();
   }
 
   return (
