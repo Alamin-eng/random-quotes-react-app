@@ -1,5 +1,10 @@
 .parent {
-  background-color: rgb(247, 234, 196);
+  background-color: rgba(247, 225, 119, 0.8);
+  background-image: url("https://wallpaperaccess.com/full/1091424.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode:screen;
   height: auto;
   margin-left: -2%;
   width: 80vw;
@@ -24,14 +29,14 @@ h2 {
 }
 
 h4 {
-  color: rgb(238, 13, 110);
+  color: rgb(235, 91, 91);
   letter-spacing: 4px;
   padding-top: 2%;
   display: flex;
   justify-content: end;
 }
 .author-font{
-  background-color: rgb(222, 200, 197,.5);
+  background-color: rgba(106, 244, 212, 0.5);
   padding: 8px;
   border-radius: 6px;
 }
@@ -63,7 +68,10 @@ button {
   body {
     background-size: cover;
   }
-
+  .parent{
+    background-size: contain contain; 
+    /* ^^ Notice double contain used*/
+  }
   button {
     position: relative;
     width: 31vw;
