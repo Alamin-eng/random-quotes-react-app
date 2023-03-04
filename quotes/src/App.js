@@ -5,23 +5,28 @@ import axios from "axios";
 
 function App() {
   const [quotes, setquotes] = useState([]); // we need to use [] instead of null in here
-
-  useEffect(() => {
+  const [status, setStatus] = useState("fetching");
+ useEffect(() => {
     //for package.json - "start": "node ../server.js & react-scripts start",
-    fetchData(); // separate fetch data function created below and called in here
+    setTimeout(() => {
+      fetchData(); // separate fetch data function created below and called in here;
+    }, "1500");
   }, []);
 
-// used axios to fetch external link
-const fetchData = async () => {
-  try {
-    const response = await axios.get(
-      "https://quotes-node-server.onrender.com/"
-    );
-    setquotes(response.data); // we are getting only data from response
-  } catch (error) {
-    console.error(error);
-  }
-};
+  // used axios to fetch external link
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://quotes-node-server.onrender.com/"
+      );
+      setStatus("found data");
+      setquotes(response.data);
+
+      //:setquotes(response.data); // we are getting only data from response
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   function getQuote() {
     window.location.reload();
@@ -33,17 +38,17 @@ const fetchData = async () => {
         <h1>Random Quotes</h1>
         <Bounce left cascade>
           <div className="parent">
-            <h2>
-              {" "}
-              " {!quotes.quote
-                ? "Click button for next quote"
-                : quotes.quote} "{" "}
-            </h2>
-            <h4>
-              {" "}
-              <span className="author-font">{quotes.author && quotes.author}</span>{" "}
-            </h4>
-            <hr></hr>
+            {status === "found data" ? (
+              <div>
+                <h2>" {quotes.quote} "</h2>
+                <h4>
+                  <span className="author-font">{quotes.author}</span>
+                </h4>
+                <hr></hr>
+              </div>
+            ) : (
+              <h3>"Loading Quotes Please Wait .."</h3>
+            )}
           </div>
         </Bounce>
       </Fade>
